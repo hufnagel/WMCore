@@ -263,6 +263,13 @@ class SetupCMSSWPset(ScriptInterface):
                 outModRef.fileName = cms.untracked.string("")
             if not hasattr(outModRef, "logicalFileName"):
                 outModRef.logicalFileName = cms.untracked.string("")
+
+        self.process.add_(
+            cms.Service("SiteLocalConfigService",
+                        debugLevel = cms.untracked.uint32(2),
+                        )
+            )
+
         return
 
 

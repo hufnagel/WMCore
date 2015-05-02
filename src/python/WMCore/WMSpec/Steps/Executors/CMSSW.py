@@ -231,7 +231,7 @@ class CMSSW(Executor):
                                          userFiles,
                                          cmsswArguments]
         logging.info("Executing CMSSW. args: %s" % args)
-        returncode = subprocess.call(args, stdout = stdoutHandle, stderr = stderrHandle)
+        returncode = subprocess.call(args, stdout = stdoutHandle, stderr = stderrHandle, env=dict(os.environ, XrdSecDEBUG='2'))
 
         stdoutHandle.close()
         stderrHandle.close()
