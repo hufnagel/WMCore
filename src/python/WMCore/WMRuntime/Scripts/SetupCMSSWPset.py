@@ -238,6 +238,13 @@ class SetupCMSSWPset(ScriptInterface):
                 msg = "Failed to create a repack process."
                 logging.exception(msg)
                 raise ex
+            if hasattr(self.process, "outputModules"):
+                outputModuleNames = self.process.outputModules.keys()
+            else:
+                outputModuleNames = self.process.outputModules_()
+            for outMod in outputModuleNames:
+                outModRef = getattr(self.process, outMod)
+                outModRef.compressionLevel = cms.untracked.int32(0)
         else:
             try:
                 from Configuration.DataProcessing.GetScenario import getScenario
